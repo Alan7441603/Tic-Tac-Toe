@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var moves = Array(repeating: "", count: 9)
+    @State private var xTurn = true
     var body: some View {
         VStack {
             Text("Tic Tac Toe")
@@ -21,11 +22,14 @@ struct ContentView: View {
                             .font(.system(size: 90))
                             .fontWeight(.heavy)
                     }
-                        .frame(width: 120, height: 120, alignment: .center)
-                        .cornerRadius(30)
-                        .onTapGesture {
-                            moves[index] = "X"
+                    .frame(width: 120, height: 120, alignment: .center)
+                    .cornerRadius(30)
+                    .onTapGesture {
+                        withAnimation(.default) {
+                            moves[index] = xTurn ? "X" : "O"
+                            xTurn.toggle()
                         }
+                    }
                 }
             }
             }
